@@ -6,11 +6,10 @@ class Database{
 	private $pass = DB_PASS;
 	private $name = DB_NAME;
 
-	private $dbh;  // database handler
-	private $stmt; // statement (query)
+	private $dbh;
+	private $stmt;
 
 	public function __construct(){
-		// data source name
 		$dsn = "mysql:host={$this->host};dbname={$this->name}";
 
 		$option = [
@@ -19,7 +18,6 @@ class Database{
 		];
 
 		try{
-			// similar to mysqli_connect()
 			$this->dbh = new PDO($dsn, $this->user, $this->pass, $option);
 		} catch(PDOException $e){
 			die($e->getMessage());
@@ -51,15 +49,17 @@ class Database{
 		$this->stmt->execute();
 	}
 
-	// fetch multi data
 	public function result_set(){
 		$this->execute();
 		return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
-	// fetch single data
 	public function single(){
 		$this->execute();
 		return $this->stmt->fetch(PDO::FETCH_ASSOC);
+	}
+
+	public function row_count(){
+		return $this->stmt->rowCount(); // similar to mysqli_affected_rows()
 	}
 }
