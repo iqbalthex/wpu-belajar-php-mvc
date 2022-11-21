@@ -2,11 +2,13 @@
 
 class Home extends Controller{
 	public function index(){
-		$data['title'] = 'Home';
+		$data = [
+			'title' => 'Home',
+			'name' => $this->model('User_model')->get_user() // get data from model (db)
+		];
 
-		// calling view
-		$this->view('templates/header', $data); # + send data
-		$this->view('home/index');
+		$this->view('templates/header', $data);
+		$this->view('home/index', $data);
 		$this->view('templates/footer');
 	}
 }
