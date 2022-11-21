@@ -60,6 +60,6 @@ class Database{
 	}
 
 	public function row_count(){
-		return $this->stmt->rowCount(); // similar to mysqli_affected_rows()
+		return $this->stmt->rowCount();
 	}
 }
