@@ -17,6 +17,6 @@ class Flasher{
 			</div>";
 		}
 
-		unset($_SESSION['flash']); // flash message show once
+		unset($_SESSION['flash']);
 	}
 }
