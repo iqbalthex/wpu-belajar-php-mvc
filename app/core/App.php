@@ -1,13 +1,11 @@
 <?php
 
 class App{
-	// default controller, method and params
 	protected $controller = 'Home';
 	protected $method = 'index';
 	protected $params = [];
 
 	public function __construct(){
-		// use default if needed
 		$url = $this->parseURL() ?? [$this->controller, $this->method];
 
 

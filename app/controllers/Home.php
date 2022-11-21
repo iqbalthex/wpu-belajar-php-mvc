@@ -1,8 +1,12 @@
 <?php
 
-class Home{
-	// base_url/home || base_url/home/index
+class Home extends Controller{
 	public function index(){
-		echo 'home/index';
+		$data['title'] = 'Home';
+
+		// calling view
+		$this->view('templates/header', $data); # + send data
+		$this->view('home/index');
+		$this->view('templates/footer');
 	}
 }
