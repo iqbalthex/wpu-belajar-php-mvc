@@ -23,7 +23,7 @@ class Mahasiswa extends Controller{
 		$this->view('templates/footer');
 	}
 
-	public function tambah(){
+	public function add(){
 		if( $this->model('Mahasiswa_model')->add_mahasiswa($_POST) > 0){
 			Flasher::set_flash('berhasil', 'ditambahkan', 'success');
 		} else {
@@ -43,5 +43,31 @@ class Mahasiswa extends Controller{
 
 		header('Location: ' . BASEURL . '/mahasiswa');
 		exit;
+	}
+
+	public function edit(){
+		if( $this->model('Mahasiswa_model')->edit_mahasiswa($_POST) > 0){
+			Flasher::set_flash('berhasil', 'diubah', 'success');
+		} else {
+			Flasher::set_flash('gagal', 'diubah', 'danger');
+		}
+
+		header('Location: ' . BASEURL . '/mahasiswa');
+		exit;
+	}
+
+	public function get_data($id){
+		echo json_encode($this->model('Mahasiswa_model')->get_mahasiswa_by_id($id));
+	}
+
+	public function search(){
+		$data = [
+			'title' => 'Daftar Mahasiswa',
+			'mhs' => $this->model('Mahasiswa_model')->search_mahasiswa()
+		];
+
+		$this->view('templates/header', $data);
+		$this->view('mahasiswa/index', $data);
+		$this->view('templates/footer');
 	}
 }
